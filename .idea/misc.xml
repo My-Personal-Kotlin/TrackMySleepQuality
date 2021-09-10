@@ -3,7 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_sleep_0.xml" value="0.20833333333333334" />
+        <entry key="app/src/main/res/drawable/ic_sleep_1.xml" value="0.20833333333333334" />
+        <entry key="app/src/main/res/font/roboto.xml" value="0.22239583333333332" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16869300911854104" />
+        <entry key="app/src/main/res/layout/fragment_sleep_quality.xml" value="0.16869300911854104" />
+        <entry key="app/src/main/res/layout/fragment_sleep_tracker.xml" value="0.25" />
       </map>
     </option>
   </component>
