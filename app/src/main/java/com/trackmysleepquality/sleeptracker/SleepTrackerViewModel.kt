@@ -1,7 +1,6 @@
 package com.trackmysleepquality.sleeptracker
 
 import android.app.Application
-import androidx.core.view.WindowInsetsAnimationCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -26,6 +25,10 @@ class SleepTrackerViewModel (val database: SleepDatabaseDao, application: Applic
     private val _navigateToSleepQuality = MutableLiveData<SleepNight?>()
     val navigateToSleepQuality : LiveData<SleepNight?>
         get() = _navigateToSleepQuality
+
+    private val _navigateToSleepDataQuality = MutableLiveData<Long?>()
+    val navigateToSleepDataQuality : LiveData<Long?>
+        get() = _navigateToSleepDataQuality
 
     val nightsString  = Transformations.map(_nights){
         formatNights(it,application.resources)
@@ -121,6 +124,14 @@ class SleepTrackerViewModel (val database: SleepDatabaseDao, application: Applic
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
+    }
+
+    fun onSleepNightClicked(it: Long) {
+        _navigateToSleepDataQuality.value = it
+    }
+
+    fun onSleepDataQualityNavigated(){
+        _navigateToSleepDataQuality.value = null
     }
 
 //

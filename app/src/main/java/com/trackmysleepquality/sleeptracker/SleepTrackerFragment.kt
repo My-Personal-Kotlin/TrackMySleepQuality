@@ -1,6 +1,5 @@
 package com.trackmysleepquality.sleeptracker
 
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.trackmysleepquality.R
 import com.trackmysleepquality.database.SleepDatabase
@@ -42,7 +40,20 @@ class SleepTrackerFragment : Fragment() {
 
         binding.sleepList.layoutManager = manager
 
-        val adapter = SleepNightAdapter()
+        val adapter = SleepNightAdapter( SleepNightListener {
+                sleepTrackerViewModel.onSleepNightClicked(it)
+            }
+        )
+
+        sleepTrackerViewModel.navigateToSleepDataQuality.observe(viewLifecycleOwner, Observer {
+            nightId -> nightId?.let {
+                findNavController().navigate(
+                    SleepTrackerFragmentDirections
+                        .actionSleepTrackerFragmentToSleepDetailFragment(nightId))
+                sleepTrackerViewModel.onSleepDataQualityNavigated()
+            }
+
+        })
 
         binding.sleepList.adapter = adapter
 
